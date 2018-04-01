@@ -37,12 +37,12 @@ def main():
 	SONG_END = pygame.USEREVENT + 1
 	pygame.mixer.music.set_endevent(SONG_END)
 
-	soundtrack = ['Ambient_Blues_Joe_ID_773.mp3','Chief_Inspector_Baldwin_ID_873.mp3']
+	soundtrack = ['VA_-_Best_of_NTNS_Radio_-_01_-_Pi-om_-_Falta_de_tanga.mp3']
 	current_track = random.choice(soundtrack)
 	pygame.mixer.music.load(os.path.join('mp3', current_track))
 	pygame.mixer.music.play()
 	
-	sound_files = ['snare.wav','drumsticks.wav']
+	sound_files = ['drumsticks.wav','snare.wav']
 	sound_library = []
 	for s in sound_files:
 		sound_library.append(pygame.mixer.Sound(os.path.join('mp3', s)))

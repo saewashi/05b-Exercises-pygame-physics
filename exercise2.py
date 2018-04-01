@@ -48,14 +48,14 @@ class Ball(pygame.sprite.Sprite):
 			self.rect.left = 0
 			dx *= -1
 		if self.rect.top < 0:
-			self.rect.top = 0
-			dy *= -1
-		if self.rect.bottom > HEIGHT:
-			self.rect.bottom = HEIGHT
-			dy *= -1
-		self.direction = (dx,dy)
+			self.rect.top = 0 # Setting rect.top = 0
+			dy *= -1 # Setting the vertical and multplying/equalizing it to -1.
+		if self.rect.bottom > HEIGHT: # If statement for making rect.bottom greater than height.
+			self.rect.bottom = HEIGHT # Setting rect.bottom equal to height.
+			dy *= -1 # Same as line 52.
+		self.direction = (dx,dy) # Setting the direction equal to the horizontal and vertical.
 	
-	def collide(self, other_object):	
+	def collide(self, other_object): # Defining a collision between another object.
 		'''
 		
 		Checks to see if the object has collided with another object. Assumes that each collision will be calculated pairwise.
@@ -65,30 +65,30 @@ class Ball(pygame.sprite.Sprite):
 		'''
 		(dx,dy) = self.direction				# the x and y components of the direction
 		(odx,ody) = other_object.direction		# the x and y components of the other object's direction
-		(cx,cy) = self.rect.center
-		(ocx,ocy) = other_object.rect.center
-		radius = self.rect.width/2
-		oradius = other_object.rect.width/2
+		(cx,cy) = self.rect.center # setting cx and cy to the center?
+		(ocx,ocy) = other_object.rect.center # Having the other objects collide with the center object?
+		radius = self.rect.width/2 # setting the radius and dividing the rect.width by 2.
+		oradius = other_object.rect.width/2 # setting the oradius to the other object and dividing the width by 2.
 		#find the hypotenuse
-		distance = math.sqrt(abs(cx-ocx)**2 + abs(cy-ocy)**2)
-		if distance <= 0:
-			distance = 0.1
-		combined_distance = (radius+oradius)
+		distance = math.sqrt(abs(cx-ocx)**2 + abs(cy-ocy)**2) # Setting the distance with the square root of bouncing objects, times 2
+		if distance <= 0: # If statement for distance less-than or equal to 0
+			distance = 0.1 # distance is equal to 0.1
+		combined_distance = (radius+oradius) # Combining the distance with the radius and oradius.
 		if distance <= combined_distance:	#collision
 			normal = ((cx-ocx)/distance,(cy-ocy)/distance)	# a vector tangent to the plane of collision
 			velocity_delta = ((odx-dx),(ody-dy))	#the relative difference between the speed of the two objects
-			(nx,ny) = normal
-			(vdx,vdy) = velocity_delta
-			dot_product = nx*vdx + ny*vdy
+			(nx,ny) = normal # making nx and ny equal to normal
+			(vdx,vdy) = velocity_delta # setting the components to equal the velocity_delta.
+			dot_product = nx*vdx + ny*vdy # setting the dot_
 			if dot_product >= 0:	#check if the objects are moving toward each other
-				impulse_strength = dot_product * (self.mass / other_object.mass)
-				impulse = (ix,iy) = (impulse_strength * nx, impulse_strength * ny)
-				dx += ix * (other_object.mass/self.mass)
-				dy += iy * (other_object.mass/self.mass)
-				self.direction = (dx,dy)
-				odx -= ix * (self.mass/other_object.mass)
-				ody -= iy * (self.mass/other_object.mass)
-				other_object.direction = (odx,ody)
+				impulse_strength = dot_product * (self.mass / other_object.mass) # setting the impulse strength to equal the dot product and multiplying it times mass and the other objects mass.
+				impulse = (ix,iy) = (impulse_strength * nx, impulse_strength * ny) # impulse equal to the componments and the multiplying the impulse strength by the components.
+				dx += ix * (other_object.mass/self.mass) # taking the componments and += to the other object mass and dividing by the main mass.
+				dy += iy * (other_object.mass/self.mass) # same as above, just this time with iy.
+				self.direction = (dx,dy) # Setting the direction the componments of the vertical and horizontal.
+				odx -= ix * (self.mass/other_object.mass) # Taking the odx componment and making it less equal to ix times the mass and other object mass.
+				ody -= iy * (self.mass/other_object.mass) # Same as above, just with the ody and iy.
+				other_object.direction = (odx,ody) # Setting the other object direction to the odx and ody componments.
 
 	def draw(self,screen):
 		self.image.blit(screen,(0,0),self.rect)

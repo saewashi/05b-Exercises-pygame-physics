@@ -22,9 +22,9 @@ logger = logging.getLogger(__name__)
 screen_size = (600,600)
 FPS = 60
 black = (0,0,0)
-gravity = 0
-friction = 0
-air_resistance = 0
+gravity = 0.5
+friction = 0.1
+air_resistance = 0.1
 
 class Ball(pygame.sprite.Sprite):
 	def __init__(self, i, size, color, position, direction):
@@ -38,32 +38,32 @@ class Ball(pygame.sprite.Sprite):
 		self.direction = direction
 		self.id = i
 
-	def update(self):
+	def update(self): # This is to update the program with any changes made.
 		(dx,dy) = self.direction	# get the current velocity
 		self.rect.x += dx		# move the sprite horizontally
-		self.rect.y += dy
+		self.rect.y += dy   # Moves the sprite vertically
 
-		dy = dy + gravity
-		dx *= (1.0-air_resistance)
-		dy *= (1.0-air_resistance)
+		dy = dy + gravity # this is adding the horizontal and vertical movements to gravity.
+		dx *= (1.0-air_resistance) # this is taking the horizontal movement and multiplying with the air resistence.
+		dy *= (1.0-air_resistance) # this is taking the veritcal movement and mulptying it with the air resistence.
 		
-		(WIDTH,HEIGHT) = screen_size
-		if self.rect.right >= WIDTH:
-			self.rect.right = WIDTH
-			dx = dx * -1 * (1.0-friction)
-		if self.rect.left <= 0:
-			self.rect.left = 0
-			dx = dx * -1 * (1.0-friction)
-		if self.rect.top <= 0:
-			self.rect.top = 0
-			dy = dy * -1 * (1.0-friction)
-		if self.rect.bottom >= HEIGHT:
-			self.rect.bottom = HEIGHT
-			dx = dx * -1 * (1.0-friction)
-			dy = dy * -1 * (1.0-friction)
+		(WIDTH,HEIGHT) = screen_size # this is setting the width and height to the screen size.
+		if self.rect.right >= WIDTH: # this is an if statement if the sprite is greater than or equal to the width,
+			self.rect.right = WIDTH # Same as above, just the sprite is equal to the width.
+			dx = dx * -1 * (1.0-friction) # taking the horizontal,  and taking it and multipying to the friction.
+		if self.rect.left <= 0: # If statement for rect.left less than or equal to 0.
+			self.rect.left = 0 # Setting rect.left to 0.
+			dx = dx * -1 * (1.0-friction) # Same as line 53
+		if self.rect.top <= 0: # If statement for rect.top less than or equal 0.
+			self.rect.top = 0 # setting rect.top equal to 0.
+			dy = dy * -1 * (1.0-friction) # Setting the vertical and multiplying it with -1, and the friction.
+		if self.rect.bottom >= HEIGHT: # If statement for rect.bottom to greater than or equal to height.
+			self.rect.bottom = HEIGHT # setting the rect.bottom equal to height.
+			dx = dx * -1 * (1.0-friction) # setting the horizontal and multiplying it by -1 and friction.
+			dy = dy * -1 * (1.0-friction) # setting the vertical and multiplying by -1 and the friction.
 			if abs(dy) < 1:			# a hack to keep it from bouncing forever
-				dy = 0
-		self.direction = (dx,dy)
+				dy = 0 # setting the vertical equal to 0.
+		self.direction = (dx,dy) # Setting the direction to the vertical and horizontal movements.
 
 
 def main():

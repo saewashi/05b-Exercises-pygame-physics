@@ -22,35 +22,37 @@ black = (0,0,0)
 img_size = (32,64)
 img_margin = (0,0)
 starting_position = (200,400)
-walking = [(1,0),(2,0),(3,0),(4,0),(5,0),(6,0)]
-gravity = 0.6
+walking = [(2,0),(1,0),(3,0),(4,0),(5,0),(6,0)]
+gravity = 0.10
+
 
 class Runner(pygame.sprite.Sprite):
 	def __init__(self, img, position):
 		pygame.sprite.Sprite.__init__(self)
-		self.sheet = pygame.image.load(os.path.join('img', img)).convert()	# load the image from the current folder and convert it so pygame.image can use it
-		(self.width,self.height) = img_size			# the width and height of the image on the sprite sheet
-		(self.margin_x,self.margin_y) = img_margin	# the space between the images on the sprite sheet
+		self.sheet = pygame.image.load(os.path.join('img',
+													img)).convert()  # load the image from the current folder and convert it so pygame.image can use it
+		(self.width, self.height) = img_size  # the width and height of the image on the sprite sheet
+		(self.margin_x, self.margin_y) = img_margin  # the space between the images on the sprite sheet
 
-		self.rect = pygame.Rect((self.margin_x,self.margin_y,self.width,self.height))
+		self.rect = pygame.Rect((self.margin_x, self.margin_y, self.width, self.height))
 		self.image = pygame.Surface(self.rect.size).convert()
-		self.image.blit(self.sheet, (0,0), self.rect)	#from the sheet, grab the correct image
-		
-		(self.rect.x,self.rect.y) = position
+		self.image.blit(self.sheet, (0, 0), self.rect)  # from the sheet, grab the correct image
+
+		(self.rect.x, self.rect.y) = position
 
 		self.walking_animation = 0
 		self.ground = position[1]
 		self.jumping = False
-		self.velocity = (0.0,0.0)
+		self.velocity = (0.0, 0.0)
 		self.jump_velocity = 10
-		
+
 	def update(self):
-		(vx,vy) = self.velocity
+		(vx, vy) = self.velocity
 		if not self.jumping:
-			(i,j) = walking[self.walking_animation]
-			x = (self.width + self.margin_x)*i + self.margin_x
-			y = (self.height + self.margin_y)*j + self.margin_y
-			self.image.blit(self.sheet, (0,0), (x,y,self.width,self.height))
+			(i, j) = walking[self.walking_animation]
+			x = (self.width + self.margin_x) * i + self.margin_x
+			y = (self.height + self.margin_y) * j + self.margin_y
+			self.image.blit(self.sheet, (0, 0), (x, y, self.width, self.height))
 			self.walking_animation += 1
 			self.walking_animation %= len(walking)
 		else:
@@ -61,15 +63,15 @@ class Runner(pygame.sprite.Sprite):
 				self.rect.top = self.ground
 				vy = 0
 				self.jumping = False
-		self.velocity = (vx,vy)
-	
+		self.velocity = (vx, vy)
+
 	def jump(self):
 		if not self.jumping:
-			(vx,vy) = self.velocity
+			(vx, vy) = self.velocity
 			vy -= self.jump_velocity
-			self.velocity = (vx,vy)
+			self.velocity = (vx, vy)
 			self.jumping = True
-				
+
 
 def main():
 	pygame.init()
@@ -77,7 +79,7 @@ def main():
 	clock = pygame.time.Clock()
 
 	rgroup = pygame.sprite.Group()
-	runner = Runner('adventurer.png',starting_position)
+	runner = Runner('adventurer.png', starting_position)
 	rgroup.add(runner)
 
 	while True:
@@ -89,7 +91,7 @@ def main():
 				pygame.quit()
 				sys.exit(0)
 
-		keys = pygame.key.get_pressed()	
+		keys = pygame.key.get_pressed()
 		'''
 		Checking for a keypress independent of the events allows us to poll the keyboard every cycle (60 FPS). 
 		It requires the key to be currently pressed, but it also allows us to deal with keys being held down
@@ -100,6 +102,7 @@ def main():
 		rgroup.update()
 		rgroup.draw(screen)
 		pygame.display.flip()
+
 
 if __name__ == '__main__':
 	main()

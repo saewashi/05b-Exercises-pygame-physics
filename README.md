@@ -1,23 +1,13 @@
 # 05b-Exercises-pygame-physics
 
-Here are some exercises to help you learn about how 2D game physics might be implemented. One exercise gives you a taste of how you might implement music and sound effects in a game.
-
-This assumes that you have Pygame installed.
-
-There are four exercise files in this repository. Follow the instructions in each of them to fulfill the exercise. Then commit your changes to your repository and push them back to GitHub.
-
-Some of the exercises require you to interpret what is going on. Feel free to explore other variations until you can come up with a reasonable explanation. 
-
-The repository includes two graphics files, adventurer.png and frameGuide.png. adventurer.png is a sprite sheet (used with exercise 3) and frameGuide.png is a breakdown of the frames in each animation sequence. They were created by created by [MoikMellah](https://opengameart.org/content/mv-platformer-male-32x64) and were provided under a Public Domain license.
-
-The repository includes several sample music and sound files:
+This exercise is to prep students for the game physics that they may use in their assignment.
 
 The music files that accompany this exercise are:
 
-* [Chief_Inspector_Baldwin_ID_873](http://freemusicarchive.org/music/Lobo_Loco/Long__Relaxed/Chief_Inspector_Baldwin_ID_873)
-* [Ambient_Blues_Joe_ID_773](http://freemusicarchive.org/music/Lobo_Loco/Long__Relaxed/Ambient_Blues_Joe_ID_773)
+* [Pi-om - Falta de tanga](http://freemusicarchive.org/music/VA_-_Best_of_NTNS_Radio/NNTS_074_-_Trip/01_-_Pi-om_-_Falta_De_Tanga)
 
-Both were composed and performed by Lobo Loco and distributed under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License
+
+Piece was produced by Mark Stolk and distributed under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License
 
 The sound effects are:
 
@@ -25,7 +15,7 @@ The sound effects are:
 * [drumsticks.wav](https://freesound.org/people/Theriavirra/sounds/270090/) (by Theriavirra)
 
 And are distributed under a Creative Commons Attribution 3.0 Unported License
-
+* I tried to add sound effects to the keys, but every time I tried to add something, it kept giving me an error, and saying that pygame crashed. . .
 ---
 
 As with your assignments, please edit the LICENSE file (replace the [year] [fullname] with the current year and your name), and edit this file to describe what your code does.
